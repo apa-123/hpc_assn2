@@ -32,7 +32,8 @@ int main() {
 		memset(pos, 0, n*sizeof(vect_t));
 		memset(old_pos, 0, n*sizeof(vect_t));
 		// initialization
-        #pragma omp parallel for 
+        #pragma omp parallel for schedule(static, 5)
+//	#pragma omp parallel for schedule(guided, 5)
         {
 		for (int q = 0; q < n; q++) {
         	forces[step][q] = 0;

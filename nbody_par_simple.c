@@ -2,6 +2,7 @@
 #include <stdlib.h>     /* srand, rand */
 #include <string.h>
 #include <math.h>       /* fabs */
+#include <omp.h>
 
 #define X 0
 #define Y 1
@@ -32,7 +33,8 @@ int main() {
 		memset(pos, 0, n*sizeof(vect_t));
 		memset(old_pos, 0, n*sizeof(vect_t));
 		// initialization
-        #pragma omp parallel for 
+        #pragma omp parallel for schedule(static, 5)
+   // 	#pragma omp parallel for schedule (guided, 5)
         {
 		for (int q = 0; q < n; q++) {
         	forces[step][q] = 0;
@@ -50,7 +52,8 @@ int main() {
         }
 
 // Simple algorithm 
-    #pragma omp parallel for
+    #pragma omp parallel for schedule(static, 5)
+//    #pragma omp parallel for schedule (guided, 5)
     {
 		for (int q = 0; q < n; q++) {
 			for (int k = 0; k < n && k != q; k++) {
