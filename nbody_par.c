@@ -49,8 +49,6 @@ int main() {
 		}
         }
 // Reduced algorithm
-    // #pragma omp parallel for
-    // {
 	// 	for (int q = 0; q < n; q++) {
 	// 		// compute forces
 	// 		for (int k = q+1; k < n; k++) {
@@ -66,7 +64,6 @@ int main() {
 	// 		    forces[k][Y] -= forcey;
 	// 		}
 	// 	}
-    // }
 // Simple algorithm 
     #pragma omp parallel for
     {
@@ -81,7 +78,6 @@ int main() {
 			}
 		}
     }
-		
 		for (int q = 0; q < n-1; q++) { 
 			pos[q][X] += delta_t * vel[q][X];
 			pos[q][Y] += delta_t * vel[q][Y];
