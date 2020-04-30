@@ -70,7 +70,7 @@ int main() {
 		vel[q][Y] += delta_t/mass[q] * forces[q][Y];
 	}
 	}
-	// #pragma omp parallel for
+	#pragma omp parallel for
 		for (int i = 0; i < n; i++) {
 			printf("position: %f %f ", pos[i][X], pos[i][Y]);
 			printf("velocity: %f %f\n",vel[i][X], vel[i][Y]);

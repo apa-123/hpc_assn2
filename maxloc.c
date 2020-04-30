@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
 	#pragma omp parallel shared(maxinfo)
 	{
 		int id = omp_get_thread_num();
-		maxinfo[id].val = -1000000000000000000000000000000000000;
+		maxinfo[id].val = -10000000000000000000;
 		#pragma omp for
 			for (int i=0; i < 1000000; i++){
        				if (x[i] > maxinfo[id].val) { 
