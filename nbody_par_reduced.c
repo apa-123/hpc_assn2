@@ -32,7 +32,7 @@ int main() {
 		memset(pos, 0, n*sizeof(vect_t));
 		memset(old_pos, 0, n*sizeof(vect_t));
 		// initialization
-		#pragma omp parallel 
+		#pragma omp parallel private(step)
 		{
         #pragma omp for
 		// #pragma omp for schedule(static, 5)
