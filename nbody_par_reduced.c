@@ -33,22 +33,20 @@ int main() {
 		memset(old_pos, 0, n*sizeof(vect_t));
 		// initialization
         #pragma omp parallel for schedule(static, 5)
-//	#pragma omp parallel for schedule(guided, 5)
-        {
-		for (int q = 0; q < n; q++) {
-        	forces[step][q] = 0;
-			pos[q][X] = (rand() / (double)(RAND_MAX)) * 2 - 1;
-			pos[q][Y] = (rand() / (double)(RAND_MAX)) * 2 - 1;
+//		#pragma omp parallel for schedule(guided, 5)
+			for (int q = 0; q < n; q++) {
+				forces[step][q] = 0;
+				pos[q][X] = (rand() / (double)(RAND_MAX)) * 2 - 1;
+				pos[q][Y] = (rand() / (double)(RAND_MAX)) * 2 - 1;
 
-			old_pos[q][X] = pos[q][X];
-			old_pos[q][Y] = pos[q][Y];
+				old_pos[q][X] = pos[q][X];
+				old_pos[q][Y] = pos[q][Y];
 
-			vel[q][X] = (rand() / (double)(RAND_MAX)) * 2 - 1;
-			vel[q][Y] = (rand() / (double)(RAND_MAX)) * 2 - 1;
+				vel[q][X] = (rand() / (double)(RAND_MAX)) * 2 - 1;
+				vel[q][Y] = (rand() / (double)(RAND_MAX)) * 2 - 1;
 
-			mass[q] = fabs((rand() / (double)(RAND_MAX)) * 2 - 1);
-		}
-        }
+				mass[q] = fabs((rand() / (double)(RAND_MAX)) * 2 - 1);
+			}
 // Reduced algorithm
 		for (int q = 0; q < n; q++) {
 			// compute forces
@@ -74,11 +72,9 @@ int main() {
 		}
 	}
 	#pragma omp parallel for
-    {
-	for (int i = 0; i < n; i++) {
-		printf("position: %f %f ", pos[i][X], pos[i][Y]);
-		printf("velocity: %f %f\n",vel[i][X], vel[i][Y]);
-	}
-    }
+		for (int i = 0; i < n; i++) {
+			printf("position: %f %f ", pos[i][X], pos[i][Y]);
+			printf("velocity: %f %f\n",vel[i][X], vel[i][Y]);
+		}
 	return 0;
 } 
