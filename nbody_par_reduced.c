@@ -51,6 +51,7 @@ int main() {
 
 				mass[q] = fabs((rand() / (double)(RAND_MAX)) * 2 - 1);
 			}
+		}
 // Reduced algorithm
 		for (int q = 0; q < n; q++) {
 			// compute forces
@@ -67,7 +68,6 @@ int main() {
 			    forces[k][Y] -= forcey;
 			}
 		}
-
 		for (int q = 0; q < n-1; q++) { 
 			pos[q][X] += delta_t * vel[q][X];
 			pos[q][Y] += delta_t * vel[q][Y];
@@ -75,6 +75,8 @@ int main() {
 			vel[q][Y] += delta_t/mass[q] * forces[q][Y];
 		}
 	}
+	#pragma omp parallel 
+	{
 	#pragma omp for
 		for (int i = 0; i < n; i++) {
 			printf("position: %f %f ", pos[i][X], pos[i][Y]);
