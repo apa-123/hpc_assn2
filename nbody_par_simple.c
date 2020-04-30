@@ -51,10 +51,11 @@ int main() {
 
 				mass[q] = fabs((rand() / (double)(RAND_MAX)) * 2 - 1);
 			}
-
-
+		}
+		#pragma omp parallel 
+		{
 // Simple algorithm 
-    #pragma omp for 
+    	#pragma omp for 
     // #pragma omp for schedule(static, 5)
 //    #pragma omp parallel for schedule (guided, 5)
 		for (int q = 0; q < n; q++) {
@@ -67,13 +68,18 @@ int main() {
 			    forces[q][Y] = G * mass[q] * mass[k]/dist_cubed * y_diff;
 			}
 		}
-	for (int q = 0; q < n-1; q++) { 
-		pos[q][X] += delta_t * vel[q][X];
-		pos[q][Y] += delta_t * vel[q][Y];
-		vel[q][X] += delta_t/mass[q] * forces[q][X];
-		vel[q][Y] += delta_t/mass[q] * forces[q][Y];
+		}
+
+		for (int q = 0; q < n-1; q++) { 
+			pos[q][X] += delta_t * vel[q][X];
+			pos[q][Y] += delta_t * vel[q][Y];
+			vel[q][X] += delta_t/mass[q] * forces[q][X];
+			vel[q][Y] += delta_t/mass[q] * forces[q][Y];
+		}
 	}
-	}
+	
+	#pragma omp parallel 
+	{
 	#pragma omp for
 		for (int i = 0; i < n; i++) {
 			printf("position: %f %f ", pos[i][X], pos[i][Y]);
