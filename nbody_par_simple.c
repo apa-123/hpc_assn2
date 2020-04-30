@@ -35,8 +35,8 @@ int main() {
 		// initialization
 		#pragma omp parallel 
 		{
-
-        #pragma omp for schedule(static, 5)
+        #pragma omp for 
+        // #pragma omp for schedule(static, 5)
    // 	#pragma omp parallel for schedule (guided, 5)
 			for (int q = 0; q < n; q++) {
 				forces[step][q] = 0;
@@ -54,7 +54,8 @@ int main() {
 
 
 // Simple algorithm 
-    #pragma omp for schedule(static, 5)
+    #pragma omp for 
+    // #pragma omp for schedule(static, 5)
 //    #pragma omp parallel for schedule (guided, 5)
 		for (int q = 0; q < n; q++) {
 			for (int k = 0; k < n && k != q; k++) {

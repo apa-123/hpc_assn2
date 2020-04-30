@@ -32,7 +32,11 @@ int main() {
 		memset(pos, 0, n*sizeof(vect_t));
 		memset(old_pos, 0, n*sizeof(vect_t));
 		// initialization
-        #pragma omp parallel for schedule(static, 5)
+		#pragma omp parallel 
+		{
+        #pragma omp for
+		// #pragma omp for schedule(static, 5)
+
 //		#pragma omp parallel for schedule(guided, 5)
 			for (int q = 0; q < n; q++) {
 				forces[step][q] = 0;
@@ -71,10 +75,11 @@ int main() {
 			vel[q][Y] += delta_t/mass[q] * forces[q][Y];
 		}
 	}
-	#pragma omp parallel for
+	#pragma omp for
 		for (int i = 0; i < n; i++) {
 			printf("position: %f %f ", pos[i][X], pos[i][Y]);
 			printf("velocity: %f %f\n",vel[i][X], vel[i][Y]);
 		}
+	}
 	return 0;
 } 
