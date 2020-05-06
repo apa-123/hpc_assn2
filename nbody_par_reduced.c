@@ -19,7 +19,7 @@ int main() {
 	float dist_cubed; 
 	float forcex;
 	float forcey;
-	
+
 	vect_t* forces = malloc(n * sizeof(vect_t));
 	vect_t* vel = malloc(n*sizeof(vect_t));
 	vect_t* pos = malloc(n*sizeof(vect_t));
@@ -30,10 +30,10 @@ int main() {
 	memset(pos, 0, n*sizeof(vect_t));
 	memset(old_pos, 0, n*sizeof(vect_t));
 
+	#pragma omp parallel 
+	{
 	for (int step = 0; step <= T; step++) { 
 		// initialization
-		#pragma omp parallel private(step)
-		{
         #pragma omp for
 		// #pragma omp for schedule(static, 5)
 

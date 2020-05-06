@@ -30,11 +30,11 @@ int main() {
 	memset(vel, 0, n*sizeof(vect_t));
 	memset(pos, 0, n*sizeof(vect_t));
 	memset(old_pos, 0, n*sizeof(vect_t));
-	
+
+	#pragma omp parallel 
+	{
 	for (int step = 0; step <= T; step++) { 
 		// initialization
-		#pragma omp parallel 
-		{
         #pragma omp for 
         // #pragma omp for schedule(static, 5)
    // 	#pragma omp parallel for schedule (guided, 5)
