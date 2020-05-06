@@ -20,17 +20,18 @@ int main() {
 	float forcex;
 	float forcey;
 
+
 	vect_t* forces = malloc(n * sizeof(vect_t));
 	vect_t* vel = malloc(n*sizeof(vect_t));
 	vect_t* pos = malloc(n*sizeof(vect_t));
 	vect_t* old_pos = malloc(n*sizeof(vect_t));
 	double* mass = malloc(n*sizeof(int));
+	memset(forces, 0, n*sizeof(vect_t));
+	memset(vel, 0, n*sizeof(vect_t));
+	memset(pos, 0, n*sizeof(vect_t));
+	memset(old_pos, 0, n*sizeof(vect_t));
 
 	for (int step = 0; step <= T; step++) { 
-		memset(forces, 0, n*sizeof(vect_t));
-		memset(vel, 0, n*sizeof(vect_t));
-		memset(pos, 0, n*sizeof(vect_t));
-		memset(old_pos, 0, n*sizeof(vect_t));
 		// initialization
 		for (int q = 0; q < n; q++) {
         	forces[step][q] = 0;
